@@ -17,9 +17,9 @@ jobs:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_USER: postgres
+          POSTGRES_USER: sanya1337
           POSTGRES_PASSWORD: 0180
-          POSTGRES_DB: FitnessAppDB
+          POSTGRES_DB: fitnessappdb
         ports:
           - 5432:5432
         # Ожидаем запуска PostgreSQL, перед тем как тесты будут выполнены
@@ -42,7 +42,7 @@ jobs:
       - name: Set environment variables
         run: |
           # Используем правильное имя хоста для контейнера PostgreSQL
-          echo "DATABASE_URL=postgresql://postgres:0180@postgres:5432/FitnessAppDB" >> $GITHUB_ENV
+          echo "DATABASE_URL=postgresql://sanya1337:0180@postgres:5432/fitnessappdb" >> $GITHUB_ENV
 
       - name: Test with pytest
         run: |
