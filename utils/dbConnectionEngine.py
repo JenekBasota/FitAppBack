@@ -1,11 +1,8 @@
 from sqlalchemy import create_engine
-import os
-
 
 class dbConnectionEngine:
-   def get_engine(self):
-        url = os.getenv('DATABASE_URL')  # или другой способ получения строки подключения
-        if not url:
-         raise ValueError("DATABASE_URL is not set or is invalid")
-        engine = create_engine("postgresql://postgres:0180@localhost:5432/FitnessAppDB", pool_size=50, echo=False)
-        return engine
+    def __init__(self, database_url=None):
+        self.database_url = database_url or 'sqlite:///test.db'  # Используем SQLite по умолчанию
+
+    def get_engine(self):
+        return create_engine(self.database_url)
