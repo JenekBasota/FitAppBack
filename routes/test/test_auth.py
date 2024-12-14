@@ -176,8 +176,8 @@ def test_missing_json(client):
 
 def test_successful_registration(client):
     response = client.post('/api/auth/register', json={
-        "username": "asdasddas",
-        "email": "asda@example.com",
+        "username": "makasjdajsdniadn",
+        "email": "majfqnfoqplznfyt@example.com",
         "weight": 70,
         "height": 175,  
         "gender": "m",
