@@ -17,9 +17,9 @@ jobs:
       postgres:
         image: postgres:13
         env:
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: dbname
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: 0180
+          POSTGRES_DB: FitnessAppDB
         ports:
           - 5432:5432
         # Ставим паузу для того, чтобы контейнер успел запуститься
@@ -41,7 +41,7 @@ jobs:
 
       - name: Set environment variables
         run: |
-          echo "DATABASE_URL=postgresql://user:password@localhost:5432/dbname" >> $GITHUB_ENV
+          echo "DATABASE_URL=postgresql://postgres:0180@localhost:5432/FitnessAppDB" >> $GITHUB_ENV
 
       - name: Lint with flake8
         run: |
