@@ -6,7 +6,7 @@ import os
 from sqlalchemy.orm import sessionmaker
 from utils import dbConnectionEngine
 from routes import auth_Blueprint, jwt_Blueprint, swaggerui_blueprint
-from models import Base  # Импортируем базовый класс для создания таблиц
+from models import Base, User  # Импортируем базовый класс для создания таблиц
 
 def create_app():
     
@@ -22,6 +22,7 @@ def create_app():
             engine = dbConnectionEngine(database_url).get_engine()
             current_app.session_bd = sessionmaker(bind=engine)()
             Base.metadata.create_all(engine)  # Создаем таблицы
+
 
     @app.route('/')
     def hello_world():

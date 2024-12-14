@@ -15,3 +15,20 @@ class User(Base):
     balance = Column(Float, default=0)
     lives = Column(Integer, default=0)
     programs = Column(String, nullable=True)
+
+    @staticmethod
+    def create_default_user(session):
+        """Создание первоначальной записи пользователя."""
+        default_user = User(
+            username='admin',
+            email='admin@mail.ru',
+            password='123456',  
+            weight=70,
+            height=175,
+            gender='M',
+            balance=100,
+            lives=5,
+            programs='default_program'
+        )
+        session.add(default_user)
+        session.commit()
