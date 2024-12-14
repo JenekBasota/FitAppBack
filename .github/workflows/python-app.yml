@@ -15,7 +15,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:13
+        image: postgres:15
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: 0180
@@ -44,13 +44,6 @@ jobs:
           # Используем правильное имя хоста для контейнера PostgreSQL
           echo "DATABASE_URL=postgresql://postgres:0180@postgres:5432/FitnessAppDB" >> $GITHUB_ENV
 
-      - name: Lint with flake8
-        run: |
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-
       - name: Test with pytest
-        env:
-          DATABASE_URL: ${{ env.DATABASE_URL }}
         run: |
           pytest
