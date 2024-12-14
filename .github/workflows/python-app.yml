@@ -22,8 +22,8 @@ jobs:
           POSTGRES_DB: FitnessAppDB
         ports:
           - 5432:5432
-        # Ставим паузу для того, чтобы контейнер успел запуститься
-        options: --health-cmd="pg_isready -U user" --health-timeout=30s --health-retries=5
+        # Ожидаем запуска PostgreSQL, перед тем как тесты будут выполнены
+        options: --health-cmd="pg_isready -U postgres" --health-timeout=30s --health-retries=5
 
     steps:
       - uses: actions/checkout@v4
@@ -41,13 +41,12 @@ jobs:
 
       - name: Set environment variables
         run: |
-          echo "DATABASE_URL=postgresql://postgres:0180@localhost:5432/FitnessAppDB" >> $GITHUB_ENV
+          # Используем правильное имя хоста для контейнера PostgreSQL
+          echo "DATABASE_URL=postgresql://postgres:0180@postgres:5432/FitnessAppDB" >> $GITHUB_ENV
 
       - name: Lint with flake8
         run: |
-          # stop the build if there are Python syntax errors or undefined names
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
       - name: Test with pytest
