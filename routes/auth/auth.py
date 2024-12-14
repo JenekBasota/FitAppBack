@@ -16,6 +16,7 @@ def init_auth_blueprint(state):
     auth_Blueprint.user_table = UsersService(app.session_bd, auth_Blueprint.hasher)
 
 
+
 @auth_Blueprint.route("/login", methods=["POST"])
 def login():
     if not request.is_json:
@@ -148,3 +149,4 @@ def register_step_two():
             },
         }
     )
+
