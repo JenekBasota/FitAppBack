@@ -22,6 +22,7 @@ def create_app():
     # Инициализация расширений
     cors = CORS()
     jwt = JWTManager()
+    
 
     cors.init_app(app, resources={r"/*": {"origins": "*"}})
     jwt.init_app(app)
@@ -32,6 +33,7 @@ def create_app():
             current_app.session_bd = sessionmaker(
                 bind=dbConnectionEngine().get_engine().connect()
             )()
+            
 
     # Вызов функции для настройки контекста
     setup_app_context()
