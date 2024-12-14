@@ -42,7 +42,7 @@ jobs:
       - name: Set environment variables
         run: |
           # Используем правильное имя хоста для контейнера PostgreSQL
-          "DATABASE_URL=postgresql://postgres:0180@postgres:5432/FitnessAppDB" >> $GITHUB_ENV
+          echo "DATABASE_URL=postgresql://postgres:0180@postgres:5432/FitnessAppDB" >> $GITHUB_ENV
 
       - name: Lint with flake8
         run: |
@@ -50,5 +50,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
       - name: Test with pytest
+        env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
         run: |
           pytest
